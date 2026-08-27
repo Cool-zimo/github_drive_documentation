@@ -1,5 +1,22 @@
 # 插件开发指南
 
+## 两种发布方式
+
+GitHub Drive 支持两种插件发布渠道：
+
+### 🏛️ 官方插件（受信任）
+- 提交到官方仓库 [github_drive_plugins](https://github.com/Cool-zimo/github_drive_plugins)
+- 经过审核，在插件广场「官方插件」Tab 显示
+- 无安全警告，用户可直接安装
+
+### 🌐 第三方插件（众筹模式）
+- 任何人创建名为 `GD-Plugin-{插件名}` 的公开仓库即可发布
+- 自动被搜索到，在插件广场「发现插件」Tab 显示
+- 安装时会显示安全警告，用户需确认信任
+- 无需申请，完全开放
+
+---
+
 ## 插件是什么
 插件是一个独立的 HTML 文件，在 iframe 沙箱中运行，通过 postMessage 与 GitHub Drive 主应用交互。
 
