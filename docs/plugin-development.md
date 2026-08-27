@@ -66,6 +66,10 @@
 > - **Emoji**（推荐）：如 `"🚀"`、`"📺"`、`"🧩"`
 > - **图片 URL**：如 `"https://example.com/icon.png"`，会自动以图片形式显示
 >
+> **type 字段**：`"plugin"`（默认，工具类，弹窗运行）或 `"game"`（游戏类，全屏运行）
+>
+> **fullscreen 字段**：设为 `true` 可强制全屏运行（即使 type 不是 game）
+>
 > 建议使用 64x64 以上的正方形图片，支持 PNG/JPG/SVG。
 
 4. 提交 Pull Request
