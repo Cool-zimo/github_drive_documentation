@@ -74,6 +74,28 @@
 
 4. 提交 Pull Request
 
+### 发布第三方插件（众筹模式）
+
+1. 创建公开仓库，命名格式：`GD-Plugin-{你的插件名}`
+   - 例如：`GD-Plugin-CoolClock`、`GD-Plugin-MyGame`
+2. 在仓库根目录创建 `plugin.json`：
+```json
+{
+  "id": "your-plugin-id",
+  "name": "插件名称",
+  "description": "插件功能描述",
+  "author": "你的GitHub用户名",
+  "version": "1.0.0",
+  "icon": "🧩",
+  "type": "plugin",
+  "file": "index.html"
+}
+```
+3. 创建插件 HTML 文件（如 `index.html`）
+4. 推送到 GitHub 后，在 GitHub Drive 插件广场的「发现插件」Tab 中即可搜索到
+
+> **注意**：第三方插件安装时会显示安全警告。请确保你的插件代码安全可信，不要窃取用户 Token 或文件。
+
 ## 注意事项
 - 插件在 iframe 中运行，无法直接访问主应用的 DOM
 - 所有文件操作通过 `GD` API 完成
