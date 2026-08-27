@@ -61,6 +61,13 @@
   "file": "plugins/my-plugin.html"
 }
 ```
+
+> **icon 字段**：支持两种格式
+> - **Emoji**（推荐）：如 `"🚀"`、`"📺"`、`"🧩"`
+> - **图片 URL**：如 `"https://example.com/icon.png"`，会自动以图片形式显示
+>
+> 建议使用 64x64 以上的正方形图片，支持 PNG/JPG/SVG。
+
 4. 提交 Pull Request
 
 ## 注意事项
