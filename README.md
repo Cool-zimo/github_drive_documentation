@@ -1,3 +1,7 @@
+<div align="center">
+
+<img src="assets/icon-drive-192.png" width="96" alt="GitHub Drive">
+
 # GitHub Drive 文档
 
 基于 GitHub 的虚拟文件系统，用 GitHub 仓库存储文件，支持分片上传、分享、插件扩展。
