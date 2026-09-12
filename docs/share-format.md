@@ -46,6 +46,3 @@ q=gd-share in:name
 然后读取每个仓库的 `share.json`，验证 `type === "github-drive-share"`。
 
 只有符合标准格式的分享才会出现在「发现分享」页面。
-
-<!-- CI-AUTOSYNC-TEST -->
-本行由 CI 自动同步测试添加，用于验证 push 触发链路。
