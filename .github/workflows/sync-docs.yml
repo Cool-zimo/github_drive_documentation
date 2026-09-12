@@ -1,0 +1,97 @@
+name: 同步到镜像站
+
+on:
+  # 主仓库文档有更新就同步
+  push:
+    branches: [main]
+    paths:
+      - '**.md'
+      - 'assets/**'
+  # PR 时只做检查，不实际写入
+  pull_request:
+    branches: [main]
+    paths:
+      - '**.md'
+      - 'assets/**'
+  # 手动触发
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: '只检查不写入'
+        type: boolean
+        default: false
+      rollback:
+        description: '回滚镜像站到上次同步前（忽略 dry_run）'
+        type: boolean
+        default: false
+  # 兜底：webhook 丢失或 token 临时失效时补跑
+  schedule:
+    - cron: '17 */6 * * *'
+
+# 同一时间只允许一个同步任务，避免并发写入互相覆盖
+concurrency:
+  group: sync-docs
+  cancel-in-progress: false
+
+jobs:
+  # PR 场景：只检查镜像站是否会落后，作为提醒
+  check:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: 检查差异
+        env:
+          GITHUB_TOKEN: ${{ secrets.SYNC_TOKEN }}
+        run: |
+          python3 tools/sync_docs.py --dry-run
+
+  # push / 手动 / 定时：真正执行同步
+  sync:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 同步文档
+        id: sync
+        env:
+          GITHUB_TOKEN: ${{ secrets.SYNC_TOKEN }}
+          CI: 'true'
+        run: |
+          set -o pipefail
+          if [ "${{ inputs.rollback }}" = "true" ]; then
+            python3 tools/sync_docs.py --rollback 2>&1 | tee sync.log
+          elif [ "${{ inputs.dry_run }}" = "true" ]; then
+            python3 tools/sync_docs.py --dry-run 2>&1 | tee sync.log
+          else
+            python3 tools/sync_docs.py 2>&1 | tee sync.log
+          fi
+
+      - name: 输出摘要
+        if: always()
+        run: |
+          {
+            echo "## 📄 文档同步结果"
+            echo ""
+            echo '```'
+            cat sync.log 2>/dev/null || echo '（无输出）'
+            echo '```'
+            echo ""
+            echo "镜像站：https://cool-zimo.github.io/Github_Drive-Documentation/"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: 失败时提示排查
+        if: failure()
+        run: |
+          echo "::error::同步失败。常见原因：
+          1. SYNC_TOKEN 未设置或已过期（Settings → Secrets → SYNC_TOKEN）
+          2. Token 缺少对 Github_Drive-Documentation 的 Contents 写权限
+          3. 两个仓库的默认分支不是 main" | tee -a "$GITHUB_STEP_SUMMARY"
