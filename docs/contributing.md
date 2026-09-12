@@ -68,3 +68,62 @@
 ## 问题反馈
 
 遇到问题请在 GitHub 提交 Issue。
+
+---
+
+## 📄 文档站维护（维护者）
+
+文档主站在 [github_drive_documentation](https://github.com/Cool-zimo/github_drive_documentation)，
+另有一个镜像站 `Github_Drive-Documentation`（旧地址，保留给已收藏的用户）。
+
+### 自动同步
+
+改完主站文档推送到 main 后，GitHub Actions 会自动同步到镜像站：
+
+- 脚本：`tools/sync_docs.py`
+- 工作流：`.github/workflows/sync-docs.yml`
+
+| 触发方式 | 行为 |
+|---|---|
+| push 到 main（md/assets 变更） | 真正同步 |
+| Pull Request | 只跑 `--dry-run` 检查，不写入 |
+| 手动 `workflow_dispatch` | 可选 dry_run / rollback |
+| 每 6 小时定时 | 兜底，补跑失败或遗漏的同步 |
+
+### 本地也能跑
+
+```bash
+export GITHUB_TOKEN=你的 token
+python3 tools/sync_docs.py              # 同步
+python3 tools/sync_docs.py --dry-run    # 只看差异
+python3 tools/sync_docs.py --history    # 看回滚点
+python3 tools/sync_docs.py --rollback   # 回滚镜像站
+```
+
+### 冲突策略：强制覆盖
+
+镜像站如果被单独改过，同步时**直接覆盖**，不提示冲突。
+这是刻意的——主站是唯一真实来源，镜像站不该有独立内容。
+
+### 回滚
+
+每次同步前会把镜像站 `main` 压到 `sync-backup` 分支，作为回滚点。
+
+```bash
+python3 tools/sync_docs.py --rollback            # 回到上次同步前
+python3 tools/sync_docs.py --rollback <sha>      # 回到指定版本
+```
+
+> CI 环境每次都是全新的，本地 `.sync_rollback.json` 不会留存。
+> 所以 `--rollback` 不带参数时会自动回落到 `sync-backup` 分支 ——
+> 那个分支指向的正是上次同步前的状态，不依赖任何本地文件。
+
+### 需要的 Secret
+
+`SYNC_TOKEN` —— 需要对 `Github_Drive-Documentation` 的 **Contents 写权限**。
+
+Token 轮换后记得同步更新：
+**Settings → Secrets and variables → Actions → SYNC_TOKEN**
+
+> 💡 建议用 fine-grained token，只勾 `Github_Drive-Documentation` 一个仓库、
+> 只给 Contents 读写，比宽权限的经典 token 安全得多。
