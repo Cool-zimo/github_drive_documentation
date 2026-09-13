@@ -1,3 +1,8 @@
+---
+layout: default
+title: 插件开发指南
+---
+
 # 插件开发指南
 
 ## 插件是什么
@@ -5,7 +10,7 @@
 插件是一个**独立的 HTML 文件**，在 iframe 沙箱中运行，通过 `postMessage` 与 GitHub Drive 主应用交互。
 
 - 无法直接访问主应用的 DOM
-- 所有数据操作通过 API 完成（见 [API 参考](plugin-api.md)）
+- 所有数据操作通过 API 完成（见 [API 参考](plugin-api.html)）
 - 自 v0.0.37 起，**所有插件统一全屏显示**
 
 ## 两种发布方式

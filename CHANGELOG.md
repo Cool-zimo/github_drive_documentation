@@ -1,3 +1,8 @@
+---
+layout: default
+title: 更新日志
+---
+
 # 更新日志
 
 ## v0.0.37

@@ -1,3 +1,8 @@
+---
+layout: default
+title: 插件 API 参考
+---
+
 # 插件 API 参考
 
 ## 通信方式

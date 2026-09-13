@@ -1,3 +1,8 @@
+---
+layout: default
+title: 快速开始
+---
+
 # 快速开始
 
 ## 1. 登录

@@ -1,31 +1,38 @@
+---
+layout: default
+title: GitHub Drive 文档
+---
+
 <div align="center">
 
 <img src="assets/icon-drive-192.png" width="96" alt="GitHub Drive">
 
-# GitHub Drive 文档
+**基于 GitHub 的虚拟文件系统** · 用仓库存文件 · 分片上传 · 一键分享 · 插件扩展
 
-基于 GitHub 的虚拟文件系统，用 GitHub 仓库存储文件，支持分片上传、分享、插件扩展。
+</div>
+
+# GitHub Drive 文档
 
 ## 📚 文档导航
 
 ### 用户指南
-- [快速开始](docs/getting-started.md) - 登录、上传、下载基础操作
-- [完整用户指南](docs/user-guide.md) - 所有功能详解
-- [后端服务](docs/backend.md) - 可选的本地后端，突破跨域限制
-- [版本切换](docs/version-switch.md) - 体验他人改进的预览分支
-- [常见问题](docs/faq.md) - FAQ
+- [快速开始](docs/getting-started.html) - 登录、上传、下载基础操作
+- [完整用户指南](docs/user-guide.html) - 所有功能详解
+- [后端服务](docs/backend.html) - 可选的本地后端，突破跨域限制
+- [版本切换](docs/version-switch.html) - 体验他人改进的预览分支
+- [常见问题](docs/faq.html) - FAQ
 
 ### 开发者
-- [插件开发指南](docs/plugin-development.md) - 如何开发插件
-- [插件 API 参考](docs/plugin-api.md) - 插件可调用的 API 列表
-- [贡献指南](docs/contributing.md) - 提交改进与 CI/CD 流程
-- [分享格式规范](docs/share-format.md) - 分享仓库的标准格式
+- [插件开发指南](docs/plugin-development.html) - 如何开发插件
+- [插件 API 参考](docs/plugin-api.html) - 插件可调用的 API 列表
+- [贡献指南](docs/contributing.html) - 提交改进与 CI/CD 流程
+- [分享格式规范](docs/share-format.html) - 分享仓库的标准格式
 
 ### 生态
-- [仓鼠联动](docs/cangshu-integration.md) - 与配套应用的互通
+- [仓鼠联动](docs/cangshu-integration.html) - 与配套应用的互通
 
 ### 其他
-- [更新日志](CHANGELOG.md) - 版本更新记录
+- [更新日志](CHANGELOG.html) - 版本更新记录
 
 ## 🔗 相关仓库
 - [github_drive](https://github.com/Cool-zimo/github_drive) - 主应用

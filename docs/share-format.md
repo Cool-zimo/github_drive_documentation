@@ -1,3 +1,8 @@
+---
+layout: default
+title: 分享格式规范
+---
+
 # 分享格式规范
 
 GitHub Drive 的分享使用标准格式，方便搜索和发现。

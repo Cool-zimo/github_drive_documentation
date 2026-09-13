@@ -1,0 +1,41 @@
+# GitHub Pages 站点配置
+#
+# 没有这个文件，Jekyll 会用默认设置，但有两处会导致文档"显示不正确"：
+#   1. 没有 front matter 的 .md 会被当静态文件复制 —— 点开是源码，没有样式
+#   2. 链接写 .md 时，Pages 直接返回未渲染的 markdown 源码
+#
+# 配合两点修复：
+#   · 所有 .md 补了 front matter（见各文件头部）
+#   · 站内链接统一指向 .html（Jekyll 输出的真实路径）
+
+title: GitHub Drive 文档
+description: 基于 GitHub 的虚拟文件系统 —— 用仓库存文件、分片上传、一键分享、插件扩展
+
+theme: jekyll-theme-primer
+
+# 让 Jekyll 把 tools/ 也当静态资源（同步脚本是给人看的，不渲染）
+include:
+  - tools
+  - assets
+
+# 站内搜索/高亮用的 front matter 默认值
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+# 渲染设置
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  auto_ids: true
+  syntax_highlighter: rouge
+
+# 排除 CI 配置，不进 Pages 输出
+exclude:
+  - .github
+  - vendor
+  - Gemfile
+  - Gemfile.lock

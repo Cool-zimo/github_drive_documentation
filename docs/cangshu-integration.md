@@ -1,3 +1,8 @@
+---
+layout: default
+title: 仓鼠联动
+---
+
 # 仓鼠联动
 
 「仓鼠」是配套的 GitHub 仓库管理面板，与 GitHub Drive 深度互通。
